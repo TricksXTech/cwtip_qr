@@ -1,5 +1,5 @@
 # cwtip_qr
-CWTip WHMCS Gateway Plugin
+# CWTip WHMCS Gateway Plugin
 
 Copy the files from this plugin into the corresponding folders on your installation, as mentioned below:
 
