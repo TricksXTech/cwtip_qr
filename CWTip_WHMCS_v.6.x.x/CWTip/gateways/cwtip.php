@@ -21,7 +21,7 @@ function cwtip_config(){
 		"FriendlyName" => array("Type" => "System", "Value"=>"CWTip"),
 		"acc_id" => array("FriendlyName" => "Account ID", "Type" => "text", "Size" => "20", ),
 		"auth_token" => array("FriendlyName" => "Auth Token", "Type" => "text", "Size" => "16", ),
-		"endpoint_url" => array("FriendlyName" => "Transaction Url", "Type" => "text", "Size" => "90", )
+		"endpoint_url" => array("FriendlyName" => "Endpoint Url", "Type" => "text", "Size" => "90", )
 	);		
 	return $configarray;
 }
@@ -31,7 +31,6 @@ function cwtip_link($params) {
 	$acc_id = $params['acc_id'];
 	$auth_token=$params['auth_token'];
 	$order_id = $params['invoiceid'].'_'.time();
-	$website= $params['website'];
 	$transaction_url = $params['endpoint_url'];		
 	$amount = $params['amount']; 
 	$email = $params['clientdetails']['email'];
@@ -45,8 +44,7 @@ function cwtip_link($params) {
           "ORDER_ID" => $order_id ,
           "CUST_ID" => $email,
           "TXN_AMOUNT" => $amount,
-          "CALLBACK_URL" => $callBackLink,
-          "WEBSITE" => $website
+          "CALLBACK_URL" => $callBackLink
           );
 	$checksum = getChecksumFromArray($post_variables, $auth_token);
 	$companyname = 'cwtip';
@@ -55,7 +53,7 @@ function cwtip_link($params) {
 	foreach ($post_variables as $key => $value) {
 		$code.='<input type="hidden" name="'.$key.'" value="'.$value. '"/>';
 	}
-	$code.='<input type="hidden" name="CHECKSUMHASH" value="'. $checksum . '"/><input type="submit" value="Pay with cwtip" /></form>';
+	$code.='<input type="submit" value="Pay with CWTip" /></form>';
 	return $code;
 }
 ?>
